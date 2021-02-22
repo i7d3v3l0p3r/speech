@@ -1,11 +1,31 @@
 <template>
-  <button class="btn">New room</button>
+  <button class="btn" @click="newRoom">New room</button>
   <button class="btn">Scan qr</button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-export default defineComponent({});
+import { useRouter } from 'vue-router';
+import { nanoid } from 'nanoid';
+
+export default defineComponent({
+  setup() {
+    const router = useRouter();
+
+    const newRoom = () => {
+      router.push({
+        name: 'room',
+        params: {
+          id: nanoid(),
+        },
+      });
+    };
+
+    return {
+      newRoom,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
